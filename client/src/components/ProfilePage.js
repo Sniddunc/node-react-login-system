@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class ProfilePage extends Component {
   renderContent() {
-    switch (this.props.auth) {
+    /*switch (this.props.auth) {
       case null:
         return;
       case false:
-        return <p>NOT LOGGED IN</p>;
+        return <Redirect to="/login" />;
       default:
         return <p>Welcome, {this.props.auth.username}.</p>;
-    }
+    }*/
+
+    return <p>Welcome, {this.props.auth.username}.</p>;
   }
 
   render() {
@@ -28,7 +30,7 @@ class ProfilePage extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state.auth);
+  console.log(state);
   return {
     auth: state.auth
   };

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 import ProfilePage from './ProfilePage';
+import RedirectToLogin from './RedirectToLogin';
 
 const Home = () => (
   <div>
@@ -69,7 +70,11 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
-            <Route exact path="/profile" component={ProfilePage} />
+            <Route
+              exact
+              path="/profile"
+              component={this.props.auth ? ProfilePage : Login}
+            />
             <Route component={PageNotFound} />
           </Switch>
         </BrowserRouter>
@@ -78,4 +83,8 @@ class App extends Component {
   }
 }
 
-export default connect(null, actions)(App);
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, actions)(App);
